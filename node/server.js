@@ -5,9 +5,8 @@ const rp = require('request-promise');
 const config = require('./config.json');
 
 const apiService = config.api_url
-const host = config.host
 const port = config.port
-const selfURL = 'https://dev.hellocraft.xyz/node'
+const selfURL = config.self_url
 const username = config.username
 const password = config.password
 

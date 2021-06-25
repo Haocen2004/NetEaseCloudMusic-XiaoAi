@@ -1,6 +1,6 @@
 {
-    "host": "YOUR_SERVICE_HOST",
-    "port": 4444,
+    "self_url": "http://YOUR_DOMAIN:PORT",
+    "port": 3001,
     "api_url": "http://API_HOST:API_PORT",
     "username": "USERNAME_HERE",
     "password": "PASSWORD_HERE"

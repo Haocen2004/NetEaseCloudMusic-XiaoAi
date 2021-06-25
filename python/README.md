@@ -9,7 +9,8 @@ conda install flask
 
 2. Update `app.py`
 
-Change `serviceURL = 'http://YOUR_SERVICE_IP:SERVICE_PORT'` (line 15) to the actual URL of your service.
+Change `serviceURL = 'https://dev.hellocraft.xyz/node/'` (line 15) to the actual URL of your service.  
+Same with node service `self_url`
 
 3. Run `app.py`
 

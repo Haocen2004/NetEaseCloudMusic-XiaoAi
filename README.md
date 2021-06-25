@@ -1,6 +1,8 @@
 ## NetEaseCloudMusic-XiaoAi
 
-Relevant Article: https://www.ihainan.me/posts/xiaoai-netease-cloud-music/
+Relevant Article: https://www.ihainan.me/xiaoai-netease-cloud-music/
+
+Netease Cloud Music Api: https://github.com/Binaryify/NeteaseCloudMusicApi
 
 Node.js Service: https://github.com/ihainan/NetEaseCloudMusic-XiaoAi/tree/master/node
 
