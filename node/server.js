@@ -7,7 +7,7 @@ const config = require('./config.json');
 const apiService = config.api_url
 const host = config.host
 const port = config.port
-const selfURL = 'http://' + host + ':' + port
+const selfURL = 'https://dev.hellocraft.xyz/node'
 const username = config.username
 const password = config.password
 
@@ -103,7 +103,7 @@ rp({
 			}).then(function (response) {
 				if (response.statusCode == 200) {
 					const tracks = JSON.parse(response.body).playlist.tracks
-					const n = Math.min(20, tracks.length)
+					const n = Math.min(40, tracks.length)
 					var firstTwentySongs = tracks.slice(0, n)
 					var result = {}
 					var completedRequests = 0

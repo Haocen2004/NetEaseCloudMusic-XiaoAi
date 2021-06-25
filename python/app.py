@@ -12,7 +12,7 @@ from xiaoai import (XiaoAIAudioItem, XiaoAIDirective, XiaoAIOpenResponse,
                     xiaoai_request, xiaoai_response)
 
 
-serviceURL = 'http://YOUR_SERVICE_IP:SERVICE_PORT'
+serviceURL = 'https://dev.hellocraft.xyz/node/'
 
 def build_text_message(to_speak, is_session_end, open_mic):
     xiao_ai_response = XiaoAIResponse(
@@ -106,7 +106,7 @@ def parse_input(event):
         elif req.request.slot_info.intent_name == 'Ramdom_Recommended_List':
             return get_random_recommended_list()
         else:
-            return build_text_message('干啥呢', is_session_end=False, open_mic=True)
+            return build_text_message('已经打开网易云音乐', is_session_end=False, open_mic=True)
     elif req.request.type == 1:
         # Issue: http://www.miui.com/thread-21675179-1-1.html
         if req.request.slot_info.intent_name == 'Favorites':
@@ -147,4 +147,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=3002, debug=True)
