@@ -102,7 +102,7 @@ rp({
 			}).then(function (response) {
 				if (response.statusCode == 200) {
 					const tracks = JSON.parse(response.body).playlist.tracks
-					const n = Math.min(40, tracks.length)
+					const n = Math.min(50, tracks.length)
 					var firstTwentySongs = tracks.slice(0, n)
 					var result = {}
 					var completedRequests = 0

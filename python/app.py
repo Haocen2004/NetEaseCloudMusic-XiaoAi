@@ -92,7 +92,7 @@ def get_random_recommendation():
     shuffle(mp3_urls)
 
     # 随机播放每日推荐歌曲
-    return build_music_message('马上乱序播放每日推荐 ', mp3_urls)
+    return build_music_message('马上乱序播放每日推荐', mp3_urls)
 
 
 def parse_input(event):
@@ -106,7 +106,7 @@ def parse_input(event):
         elif req.request.slot_info.intent_name == 'Ramdom_Recommended_List':
             return get_random_recommended_list()
         else:
-            return build_text_message('已经打开网易云音乐', is_session_end=False, open_mic=True)
+            return build_text_message('好的，已打开网易云音乐', is_session_end=False, open_mic=True)
     elif req.request.type == 1:
         # Issue: http://www.miui.com/thread-21675179-1-1.html
         if req.request.slot_info.intent_name == 'Favorites':
