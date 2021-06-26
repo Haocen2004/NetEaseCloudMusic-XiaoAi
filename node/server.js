@@ -102,16 +102,16 @@ rp({
 			}).then(function (response) {
 				if (response.statusCode == 200) {
 					const tracks = JSON.parse(response.body).playlist.tracks
-					const n = Math.min(50, tracks.length)
-					var firstTwentySongs = tracks.slice(0, n)
+					const n = Math.min(40, tracks.length)
+					var tempSongs = tracks.slice(0, n)
 					var result = {}
 					var completedRequests = 0
 					result.result = []
-					firstTwentySongs.forEach(function (songInfo) {
+					tempSongs.forEach(function (songInfo) {
 						result.result.push(selfURL + '/song?id=' + songInfo.id)
 						// return result to user
 						completedRequests += 1
-						if (completedRequests == firstTwentySongs.length) {
+						if (completedRequests == tempSongs.length) {
 							res.status(200)
 							res.send(JSON.stringify(result))
 						}
@@ -235,8 +235,8 @@ rp({
 					var result = {}
 					var completedRequests = 0
 					if (ids.length != 0) {
-						const n = Math.min(20, ids.length)
-						const firstTwentySongs = ids
+						const n = Math.min(40, ids.length)
+						const tempSongs = ids
 							.map(x => ({
 								x,
 								r: Math.random()
@@ -245,13 +245,13 @@ rp({
 							.map(a => a.x)
 							.slice(0, n)
 						result.result = []
-						firstTwentySongs.forEach(function (id) {
+						tempSongs.forEach(function (id) {
 							console.log(id)
 							result.result.push(selfURL + '/song?id=' + id)
 
 							// return result to user
 							completedRequests += 1
-							if (completedRequests == firstTwentySongs.length) {
+							if (completedRequests == tempSongs.length) {
 								res.status(200)
 								res.send(JSON.stringify(result))
 							}
@@ -291,16 +291,16 @@ rp({
 			}).then(function (response) {
 				if (response.statusCode == 200) {
 					const recommend = JSON.parse(response.body).recommend
-					const n = Math.min(30, recommend.length)
-					var firstThirtySongs = recommend.slice(0, n)
+					const n = Math.min(40, recommend.length)
+					var tempSongs = recommend.slice(0, n)
 					var result = {}
 					var completedRequests = 0
 					result.result = []
-					firstThirtySongs.forEach(function (songInfo) {
+					tempSongs.forEach(function (songInfo) {
 						result.result.push(selfURL + '/song?id=' + songInfo.id)
 						// return result to user
 						completedRequests += 1
-						if (completedRequests == firstThirtySongs.length) {
+						if (completedRequests == tempSongs.length) {
 							res.status(200)
 							res.send(JSON.stringify(result))
 						}
