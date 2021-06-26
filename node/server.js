@@ -22,7 +22,7 @@ rp({
 	uri: apiService + '/login?email=' + username + '&password=' + password,
 }).then(function (response) {
 	// Extract user's cookie string and uid from the response
-	console.log(response)
+	// console.log(response)
 	const cookieString = response.headers['set-cookie']
 	const userJSON = JSON.parse(response.body)
 	const uid = userJSON.account.id
@@ -39,7 +39,7 @@ rp({
 		method: 'GET',
 		uri: apiService + '/user/playlist?uid=' + uid,
 	}).then(function (response) {
-		console.log(response.body)
+		// console.log(response.body)
 		// Extrat the ID number of first play list
 		const playListJSON = JSON.parse(response.body)
 		const favoriteListID = playListJSON.playlist[0].id
