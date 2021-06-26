@@ -108,6 +108,7 @@ rp({
 					var completedRequests = 0
 					result.result = []
 					tempSongs.forEach(function (songInfo) {
+						console.log('Favorite Song List add:%s-%s',songInfo.name,songInfo.id)
 						result.result.push(selfURL + '/song?id=' + songInfo.id)
 						// return result to user
 						completedRequests += 1
