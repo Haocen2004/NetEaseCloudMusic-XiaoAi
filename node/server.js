@@ -102,8 +102,15 @@ rp({
 			}).then(function (response) {
 				if (response.statusCode == 200) {
 					const tracks = JSON.parse(response.body).playlist.tracks
-					const n = Math.min(40, tracks.length)
-					var tempSongs = tracks.slice(0, n)
+					var n = Math.min(40, tracks.length)
+					var startFrom = 0
+					if (req.query.startFrom != undefined) {
+						startFrom = parseInt(req.query.startFrom);
+						n = n + parseInt(startFrom);
+						// console.log(startFrom);
+						// console.log(n);
+					}
+					var tempSongs = tracks.slice(startFrom, n)
 					var result = {}
 					var completedRequests = 0
 					result.result = []

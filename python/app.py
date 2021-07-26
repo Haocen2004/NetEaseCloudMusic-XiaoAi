@@ -45,6 +45,47 @@ def build_music_message(to_speak, mp3_urls):
         version='1.0', is_session_end=True, response=xiao_ai_response))
     return response
 
+def build_single_music_msg(to_speak,attributes_data):
+    all_list = []
+    if to_speak is not None:
+        info_tts = XiaoAIDirective(
+            type_='tts',
+            tts_item=XiaoAITTSItem(
+                type_='0', text=to_speak
+            ))
+
+        # all_list.append(info_tts)
+    currentSongPos = attributes_data['currentSongPos']
+    songUrl = attributes_data['songIdList'][currentSongPos]
+    info_audio = XiaoAIDirective(
+        type_='audio',
+        audio_item=XiaoAIAudioItem(stream=XiaoAIStream(url=songUrl))
+    )
+    for num in range(1,40):
+        all_list.append(info_audio)
+    xiao_ai_response = XiaoAIResponse(directives=all_list, open_mic=False, register_events=[{"event_name":"mediaplayer.playbacknearlyfinished"}])
+    response = xiaoai_response(XiaoAIOpenResponse(
+        version='1.0', session_attributes=attributes_data, is_session_end=True, response=xiao_ai_response))
+    return response
+
+def get_favorites_single(attributes_data):
+    if attributes_data is None:
+        mp3_urls = json.loads(requests.get(
+            serviceURL + '/likelist').text)['result']
+        attributes_data = {'songListStartFrom':0}
+        attributes_data['currentSongPos'] = 0
+        attributes_data['alreadyPlayed'] = 0
+        attributes_data['songIdList'] = mp3_urls
+        return build_single_music_msg('马上开始播放收藏歌单',attributes_data)
+    elif attributes_data['alreadyPlayed'] - attributes_data['songListStartFrom'] >= 40:
+        mp3_urls = json.loads(requests.get(
+            serviceURL + '/likelist?startFrom=' + (attributes_data['songListStartFrom'] + 40)).text)['result']
+        attributes_data['songListStartFrom'] = attributes_data['songListStartFrom'] + 40
+        attributes_data['currentSongPos'] = 0 
+        attributes_data['songIdList'] = mp3_urls
+    attributes_data['alreadyPlayed'] = attributes_data['alreadyPlayed'] + 1
+
+    return build_single_music_msg(None,attributes_data)
 
 def get_favorites():
     # 获取（部分）红心歌曲列表
@@ -108,10 +149,14 @@ def parse_input(event):
         else:
             return build_text_message('好的，已打开网易云音乐', is_session_end=False, open_mic=True)
     elif req.request.type == 1:
+        if req.request.event_type == 'mediaplayer.playbacknearlyfinished':
+            return get_favorites_single(json.loads(req.session.attributes))
         # Issue: http://www.miui.com/thread-21675179-1-1.html
-        if req.request.slot_info.intent_name == 'Favorites':
+        elif req.request.slot_info.intent_name == 'Favorites':
             if '随机' in req.query:
                 return get_random_favorites()
+            elif '单曲' in req.query:
+                return get_favorites_single(None)
             else:
                 return get_favorites()
         elif req.request.slot_info.intent_name == 'Recommendation':

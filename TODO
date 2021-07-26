@@ -1,0 +1,12 @@
+尝试使用 mediaplayer.playbacknearlyfinished 来切割歌单
+在 session_attributes 里缓存当前歌单信息
+{
+    "songIdList" : [ // max40
+        1,
+        2,
+        3
+    ],
+    "songListStartFrom": 0,
+    "currentSongPos": 1, // from 0, next song  [currentSongPos - songListStartFrom]
+    "alreadyPlayed": 0, // [alreadyPlayed - songListStartFrom] >40 refresh songIdList 
+}
