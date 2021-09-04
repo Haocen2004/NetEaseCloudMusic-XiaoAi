@@ -34,6 +34,11 @@ def build_music_message(to_speak, mp3_urls):
             ))
 
         all_list.append(info_tts)
+    place_holder = XiaoAIDirective(
+            type_='audio',
+            audio_item=XiaoAIAudioItem(stream=XiaoAIStream(url='https://just.a/placeholder.mp3'))
+        )
+    all_list.append(place_holder)
     for url in mp3_urls:
         info_audio = XiaoAIDirective(
             type_='audio',
